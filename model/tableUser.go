@@ -5,6 +5,11 @@ import (
 	"time"
 )
 
+type Request struct {
+	Email string `json:"email" binding:"required"`
+}
+
+// table in the database
 type User struct {
 	UserID         int       `gorm:"column:user_id;primary_key;AUTO_INCREMENT"`
 	Name           string    `gorm:"column:name;NOT NULL"`

@@ -29,14 +29,16 @@ func RegisterRoutes(router *gin.Engine, db *gorm.DB) {
 }
 
 func GetUser(c *gin.Context, db *gorm.DB) {
-	email := c.PostForm("email")
-	if email == "" {
+	var request model.Request
+
+	// รับค่า JSON จาก body
+	if err := c.ShouldBindJSON(&request); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"success": false, "message": "Email is required."})
 		return
 	}
 
 	var user model.User
-	if err := db.Where("email = ?", email).First(&user).Error; err != nil {
+	if err := db.Where("email = ?", request.Email).First(&user).Error; err != nil {
 		if err == gorm.ErrRecordNotFound {
 			c.JSON(http.StatusNotFound, gin.H{"success": false, "message": "User not found."})
 		} else {
