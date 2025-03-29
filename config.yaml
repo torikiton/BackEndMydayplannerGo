@@ -1,0 +1,2 @@
+mysql :
+  dsn : "406460:mydayplanner.noreply123@tcp(mysql-mydayplanner.alwaysdata.net)/mydayplanner_myproject?collation=utf8mb4_unicode_ci&parseTime=true"
